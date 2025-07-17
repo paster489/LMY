@@ -13,14 +13,15 @@ Make sure you have Anaconda or Miniconda installed.
 
 ```bash
 conda env create -f segformer_environment.yml
+conda env create -f general_environment.yml
 ```
 
 ## Files Explanation
 
-data_analysis.ipynb - for preliminary data analusis
+1) data_analysis.ipynb - for preliminary data analusis (conda environment general)
 
-preprocess.ipynb - data preprocessing
+2) preprocess.ipynb - data preprocessing (conda environment general)
 
-train.py - model training
+3) train.py - model training (conda environment segformer)
 
-postprocess.ipynb - infrence
+4) postprocess.ipynb - infrence (conda environment segformer)
