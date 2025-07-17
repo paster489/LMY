@@ -1,0 +1,9 @@
+__pycache__/
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.log
+*.ipynb_checkpoints
+segformer_output/
+
