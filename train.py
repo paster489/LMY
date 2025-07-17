@@ -24,7 +24,7 @@ from transformers import (
 from sklearn.metrics import jaccard_score
 from torch.nn.functional import interpolate
 
-# ✅ REPRODUCIBILITY FUNCTION
+# REPRODUCIBILITY FUNCTION
 def set_seed(seed=42):
     random.seed(seed)
     np.random.seed(seed)
@@ -35,13 +35,13 @@ def set_seed(seed=42):
 
 set_seed(42)
 
-# ✅ COMET
+# COMET
 experiment = Experiment(
     api_key=os.environ.get("COMET_API_KEY"),
     project_name="building-segmentation"
 )
 
-# ✅ Dataset class
+# Dataset class
 class SegFormerTIFFDataset(Dataset):
     def __init__(self, img_dir, mask_dir, processor, transform=None):
         self.img_dir = img_dir
@@ -81,13 +81,13 @@ class SegFormerTIFFDataset(Dataset):
         inputs["labels"] = inputs["labels"].squeeze()
         return inputs
 
-# ✅ Albumentations with reproducibility
+# Albumentations with reproducibility
 def get_train_augmentations():
     return A.Compose([
-            A.HorizontalFlip(p=0.5),             # ✅ Common, helps with symmetry invariance
-            A.RandomRotate90(p=0.5),             # ✅ Common for square patches (90, 180, 270°)
-            A.RandomBrightnessContrast(p=0.3),   # ✅ Helps model generalize lighting/shadow
-            A.Resize(512, 512),                  # ✅ Required to match model input size
+            A.HorizontalFlip(p=0.5),             # Common, helps with symmetry invariance
+            A.RandomRotate90(p=0.5),             # Common for square patches (90, 180, 270°)
+            A.RandomBrightnessContrast(p=0.3),   # Helps model generalize lighting/shadow
+            A.Resize(512, 512),                  # Required to match model input size
     ], additional_targets={"mask": "mask"})
 
 def get_val_augmentations():
@@ -120,7 +120,7 @@ def compute_metrics(eval_pred):
 
     return {"iou": iou}
 
-# ✅ Main
+# Main
 if __name__ == "__main__":
     processor = SegformerImageProcessor(
         reduce_labels=False, do_resize=True, size=(512, 512), do_normalize=True
@@ -152,7 +152,7 @@ if __name__ == "__main__":
         output_dir="/home/paster/LMY/segformer_output", #Where to save checkpoints, logs, and the final model.
         learning_rate=5e-5, # Small values like this are best for fine-tuning transformers.
         per_device_train_batch_size=2, #  Small batch sizes are often used when memory is limited
-        num_train_epochs=100,
+        num_train_epochs=30,
         eval_strategy="epoch", # Run evaluation after every epoch
         logging_steps=10, # Log metrics (like loss) every 10 steps. Good for tracking training progress
         save_strategy="epoch", # Save model checkpoints after every epoch.
@@ -172,7 +172,7 @@ if __name__ == "__main__":
     experiment.set_name("SegFormer")
     experiment.log_parameters({
         "model": "SegFormer-B0",
-        "epochs": 3,
+        "epochs": 100,
         "batch_size": 2,
         "learning_rate": 5e-5,
         "train_aug": "flip, rotate90, contrast, resize",
@@ -187,7 +187,7 @@ if __name__ == "__main__":
         train_dataset=train_dataset,
         eval_dataset=val_dataset,
         compute_metrics=compute_metrics,
-        callbacks=[EarlyStoppingCallback(early_stopping_patience=5)]
+        #callbacks=[EarlyStoppingCallback(early_stopping_patience=5)]
     )
 
     trainer.train()
