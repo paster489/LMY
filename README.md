@@ -18,7 +18,7 @@ conda env create -f general_environment.yml
 
 ## Files Explanation
 
-1) data_analysis.ipynb - for preliminary data analusis (conda environment general)
+1) data_analysis.ipynb - for preliminary data analysis (conda environment general)
 
 2) preprocess.ipynb - data preprocessing (conda environment general)
 
