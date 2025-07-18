@@ -18,10 +18,10 @@ conda env create -f general_environment.yml
 
 ## Files Explanation
 
-1) data_analysis.ipynb - for preliminary data analysis (conda environment general)
+1) data_analysis.ipynb - for preliminary data analysis (conda environment per general_environment.yml)
 
-2) preprocess.ipynb - data preprocessing (conda environment general)
+2) preprocess.ipynb - data preprocessing (conda environment per general_environment.yml)
 
-3) train.py - model training (conda environment segformer)
+3) train.py - model training (conda environment per segformer_environment.yml)
 
-4) postprocess.ipynb - infrence (conda environment segformer)
+4) inference.ipynb - infrence (conda environment per segformer_environment.yml)
