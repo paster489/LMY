@@ -90,6 +90,11 @@ def get_train_augmentations():
             A.Resize(512, 512),                  # Required to match model input size
     ], additional_targets={"mask": "mask"})
 
+# to improve trining we can add normalysation => ImageNet Normalization Values (RGB):
+        # A.Normalize(mean=(0.485, 0.456, 0.406),
+        #             std=(0.229, 0.224, 0.225),
+        #             max_pixel_value=255.0)
+
 def get_val_augmentations():
     return A.Compose([
         A.Resize(512, 512),
