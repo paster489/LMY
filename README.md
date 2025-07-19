@@ -9,7 +9,9 @@ cd LMY
 
 ### 2. Create the Conda environment
 
-Make sure you have Anaconda or Miniconda installed.
+Make sure you have Anaconda or Miniconda installed. 
+
+My CUDA version is 12.7, if you have other version, use https://pytorch.org/get-started/locally/ for torch installation.
 
 ```bash
 conda env create -f segformer_environment.yml
@@ -17,20 +19,6 @@ conda env create -f general_environment.yml
 ```
 
 ## 🗂️ Files Explanation
-
-1) The summary of Task 1 inside the file "Summary_Task_1.pptx"
-
-2) The summary of Task 2 inside the file "Summary_Task_2.pptx"
-
-3) "data_analysis.ipynb" - for preliminary data analysis (conda environment per general_environment.yml)
-
-4) "preprocess.ipynb" - data preprocessing (conda environment per general_environment.yml)
-
-5) "train.py" - model training (conda environment per segformer_environment.yml)
-
-6) "inference.ipynb" - infrence (conda environment per segformer_environment.yml)
-
-
 
 | File / Notebook       | Description                                                    | Environment                 |
 | --------------------- | -------------------------------------------------------------- | --------------------------- |
